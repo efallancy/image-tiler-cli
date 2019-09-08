@@ -1,0 +1,29 @@
+{
+  "name": "@emmafallancy/image-tiler-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for image tiling",
+  "bin": {
+    "tile": "./index.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "image-tiler",
+    "slippy-map"
+  ],
+  "author": "Emmanuel Fallancy <emmanuel.fallancy@gmail.com> (https://emmanuel.dev)",
+  "license": "MIT",
+  "dependencies": {
+    "command-exists": "^1.2.8",
+    "commander": "^3.0.1",
+    "image-tiler": "^2.0.1"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "engines": {
+    "node": ">=10.15.x"
+  },
+  "files": ["index.js"]
+}

@@ -11,37 +11,36 @@ const { showUsageMessage } = require('./showUsageMessage');
 const validFiles = ['.jpg', '.jpeg', '.png'];
 
 function execute(filePath) {
+  const command = 'convert';
+  return new Promise((resolve, reject) => {
+    // Only proceed when ImageMagick (especially `convert` command) has been installed
+    commandExists(command).then(() => {
+      if (filePath) {
+        if (fs.existsSync(filePath)) {
+          if (validFiles.includes(path.extname(filePath))) {
+            console.log('Creating tiles ...');
 
-  // Only proceed when ImageMagick (especially `convert` command) has been installed
-  commandExists('convert').then(() => {
-    if (filePath) {
-      if (fs.existsSync(filePath)) {
-        if (validFiles.includes(path.extname(filePath))) {
-          console.log('Creating tiles ...');
-
-          createImageTiles(filePath)
-            .then(() => {
-              console.log('Tiles created in current directory.')
-            })
-            .catch((error) => {
-              console.error('Fail to create tiles:', error.message);
-              process.exit(1);
-            });
+            createImageTiles(filePath)
+              .then(() => {
+                resolve('Tiles created in current directory.');
+              })
+              .catch((error) => {
+                reject(`Fail to create tiles: ${error.message}`);
+              });
+          } else {
+            reject('Supported files only [.jpg, .jpeg, .png]');
+          }
         } else {
-          console.error('Supported files only [.jpg, .jpeg, .png]');
-          process.exit(1);
+          reject('Image source not supported or not found');
         }
       } else {
-        console.error('Image source not supported or not found');
-        process.exit(1);
+        // If no arguments supplied, display usage message
+        // Consider it as displaying useful (and valid) message
+        resolve(showUsageMessage());
       }
-    } else {
-      // If no arguments supplied, display usage message
-      console.log(showUsageMessage());
-    }
-  }).catch((err) => {
-    console.log(showDependencyMessage());
-    process.exit(1);
+    }).catch(() => {
+      reject(showDependencyMessage());
+    });
   });
 }
 

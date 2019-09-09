@@ -19,5 +19,9 @@ program.name('tile')
   .parse(process.argv);
 
 // Execute action on tiling image
-execute(filePath);
+execute(filePath).then((msg) => {
+  console.log(msg);
+}).catch((errMsg) => {
+  console.log(errMsg);
+});
 

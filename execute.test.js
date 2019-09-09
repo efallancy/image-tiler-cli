@@ -1,19 +1,19 @@
-const fs = require('fs');
+const imageTiles = require('./createImageTiles');
+imageTiles.createImageTiles = jest.fn().mockReturnValue(Promise.resolve());
+
+const usageMessage = require('./showUsageMessage');
+usageMessage.showUsageMessage = jest.fn();
 
 const { execute } = require('./execute');
 
-const timeout = (seconds) => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve();
-  }, seconds * 1000);
-});
-
 describe('execute', () => {
-  it('should create image tiles', () => {
-    execute('./images/cat.jpg');
+  it('should call to create image tiles', async () => {
+    await execute('./images/cat.jpg'); 
+    expect(imageTiles.createImageTiles).toHaveBeenCalledTimes(1);
+  });
 
-    timeout(5);
-
-    expect(fs.existsSync('./0/0_0.jpg')).toEqual(true);
-  }, 10000);
+  it('should call to show usage message when no arguments supplied', async () => {
+    await execute();
+    expect(usageMessage.showUsageMessage).toHaveBeenCalledTimes(1);
+  })
 });

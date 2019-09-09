@@ -6,7 +6,7 @@ It uses [image-tiler](https://npmjs.com/package/image-tiler) under the hood and 
 
 ## Usage
 
-To use `@emmafallancy/image-tiler-cli`, simply install it globally by running the command below:
+This assumes that [Node.js](https://nodejs.org) has already been installed. To use `@emmafallancy/image-tiler-cli`, simply install it globally by running the command below:
 
 ```sh
 # NPM
@@ -55,6 +55,8 @@ brew install imagemagick
 
 # Windows - Refer to https://imagemagick.org/script/download.php
 ```
+
+_P.S.: Best to run with Node.js LTS (greater than or equal to v10.15.X)_
 
 ## License
 

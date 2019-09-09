@@ -27,6 +27,10 @@
     "node": ">=10.15.x"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "createImageTiles.js",
+    "execute.js",
+    "showDependencyMessage.js",
+    "showUsageMessage.js"
   ]
 }
